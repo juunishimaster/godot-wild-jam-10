@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://RouteChoice.gd" type="Script" id=1]
+[ext_resource path="res://art/panel_boltsBlue.png" type="Texture" id=2]
+[ext_resource path="res://font/Kenney Future Narrow.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
+
+[node name="RouteChoice" type="VBoxContainer"]
+margin_left = 266.0
+margin_top = 79.95
+margin_right = 783.0
+margin_bottom = 420.9
+custom_constants/separation = 10
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RouteBoxPanel" type="NinePatchRect" parent="."]
+margin_right = 517.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 0, 260 )
+rect_clip_content = true
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 128, 128 )
+patch_margin_left = 36
+patch_margin_top = 36
+patch_margin_right = 36
+patch_margin_bottom = 36
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RouteExplanation" type="Label" parent="RouteBoxPanel"]
+margin_left = 33.0
+margin_top = 29.0
+margin_right = 497.0
+margin_bottom = 236.0
+custom_fonts/font = SubResource( 1 )
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 270.0
+margin_right = 517.0
+margin_bottom = 330.0
+custom_constants/separation = 75
+alignment = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ChoiceButtonA" type="Button" parent="HBoxContainer"]
+margin_left = 41.0
+margin_right = 221.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 180, 60 )
+custom_fonts/font = SubResource( 2 )
+text = "Go to Checkpoint A"
+
+[node name="ChoiceButtonB" type="Button" parent="HBoxContainer"]
+margin_left = 296.0
+margin_right = 475.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 2 )
+text = "Go to Checkpoint B"
+
