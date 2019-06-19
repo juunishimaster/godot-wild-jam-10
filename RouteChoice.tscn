@@ -4,49 +4,50 @@
 [ext_resource path="res://art/panel_boltsBlue.png" type="Texture" id=2]
 [ext_resource path="res://font/Kenney Future Narrow.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
 
 [node name="RouteChoice" type="VBoxContainer"]
 margin_right = 517.0
-margin_bottom = 340.95
+margin_bottom = 176.0
 custom_constants/separation = 10
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="RouteBoxPanel" type="NinePatchRect" parent="."]
+[node name="FlavorTextPanel" type="NinePatchRect" parent="."]
 margin_right = 517.0
-margin_bottom = 260.0
-rect_min_size = Vector2( 0, 260 )
-rect_clip_content = true
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
 texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 128, 128 )
-patch_margin_left = 36
+region_rect = Rect2( -0.75, -0.2215, 128.5, 128.25 )
+patch_margin_left = 37
 patch_margin_top = 36
 patch_margin_right = 36
 patch_margin_bottom = 36
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="RouteExplanation" type="Label" parent="RouteBoxPanel"]
-margin_left = 33.0
-margin_top = 29.0
-margin_right = 484.0
-margin_bottom = 236.0
-custom_fonts/font = SubResource( 1 )
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+[node name="Label" type="Label" parent="FlavorTextPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -185.0
+margin_top = -19.5
+margin_right = 185.0
+margin_bottom = 19.5
+custom_fonts/font = SubResource( 2 )
+text = "This is the current available routes you can pick."
+align = 1
 autowrap = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_top = 270.0
+margin_top = 110.0
 margin_right = 517.0
-margin_bottom = 330.0
+margin_bottom = 170.0
 custom_constants/separation = 75
 alignment = 1
 __meta__ = {
@@ -58,13 +59,13 @@ margin_left = 41.0
 margin_right = 221.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 180, 60 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Go to Checkpoint A"
 
 [node name="ChoiceButtonB" type="Button" parent="HBoxContainer"]
 margin_left = 296.0
 margin_right = 475.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Go to Checkpoint B"
 

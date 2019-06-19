@@ -15,6 +15,7 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func set_text():
-	
+func set_text(a, b):
+	$HBoxContainer/ChoiceButtonA.text = "Go to checkpoint " + a
+	$HBoxContainer/ChoiceButtonB.text = "Go to checkpoint " + b
 	pass
