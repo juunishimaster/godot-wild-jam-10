@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://BriefingNews.gd" type="Script" id=1]
+[ext_resource path="res://art/panel_boltsBlue.png" type="Texture" id=2]
+[ext_resource path="res://font/Kenney Future Narrow.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 3 )
+
+[node name="BriefingNews" type="VBoxContainer"]
+margin_right = 517.0
+margin_bottom = 340.0
+custom_constants/separation = 10
+script = ExtResource( 1 )
+
+[node name="NewsPanel" type="NinePatchRect" parent="."]
+margin_right = 551.43
+margin_bottom = 320.0
+rect_min_size = Vector2( 551.43, 320 )
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 128, 128 )
+patch_margin_left = 36
+patch_margin_top = 36
+patch_margin_right = 36
+patch_margin_bottom = 36
+
+[node name="NewsContainer" type="VBoxContainer" parent="NewsPanel"]
+margin_left = 39.0
+margin_top = 27.0
+margin_right = 509.0
+margin_bottom = 291.0
+custom_constants/separation = 22
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AzuleNews" type="Label" parent="NewsPanel/NewsContainer"]
+margin_right = 470.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 400, 0 )
+custom_fonts/font = SubResource( 1 )
+text = "Azule Alliance had forbade meat goods from entering any of their checkpoints. Any violators will be jailed. "
+autowrap = true
+
+[node name="BrueNews" type="Label" parent="NewsPanel/NewsContainer"]
+margin_top = 82.0
+margin_right = 470.0
+margin_bottom = 121.0
+custom_fonts/font = SubResource( 1 )
+text = "Brue Alliance had declared new taxes for meat goods and alcohol drinks."
+autowrap = true
+
+[node name="CyanNews" type="Label" parent="NewsPanel/NewsContainer"]
+margin_top = 143.0
+margin_right = 470.0
+margin_bottom = 182.0
+custom_fonts/font = SubResource( 1 )
+text = "Due to the rise of obesity recently, Cyan Alliance increased the tax for any snack goods."
+autowrap = true
+
+[node name="Warning" type="Label" parent="NewsPanel/NewsContainer"]
+margin_top = 204.0
+margin_right = 470.0
+margin_bottom = 264.0
+custom_fonts/font = SubResource( 2 )
+text = "**AFTER YOU CLOSE THIS BRIEFING, TIME COUNTER WILL BE ACTIVATED**
+**HAVE A SAVE VOYAGE**"
+align = 1
+autowrap = true
+
+[node name="CloseBriefingButton" type="Button" parent="."]
+margin_top = 330.0
+margin_right = 551.0
+margin_bottom = 354.0
+custom_fonts/font = SubResource( 3 )
+text = "Close Briefing"
+
+[connection signal="pressed" from="CloseBriefingButton" to="." method="_on_CloseBriefingButton_pressed"]

@@ -34,6 +34,7 @@ margin_left = 300.0
 margin_right = 400.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
+disabled = true
 text = "Deilvery #3"
 
 [node name="ButtonDelivery4" type="Button" parent="." groups=[
@@ -43,6 +44,7 @@ margin_left = 450.0
 margin_right = 550.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
+disabled = true
 text = "Deilvery #4"
 
 [node name="ButtonDelivery5" type="Button" parent="." groups=[
@@ -52,6 +54,7 @@ margin_left = 600.0
 margin_right = 700.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
+disabled = true
 text = "Deilvery #5"
 
 [node name="ButtonDelivery6" type="Button" parent="." groups=[
@@ -61,6 +64,7 @@ margin_top = 150.0
 margin_right = 100.0
 margin_bottom = 250.0
 rect_min_size = Vector2( 100, 100 )
+disabled = true
 text = "Deilvery #6"
 
 [node name="ButtonDelivery7" type="Button" parent="." groups=[
@@ -71,5 +75,6 @@ margin_top = 150.0
 margin_right = 250.0
 margin_bottom = 250.0
 rect_min_size = Vector2( 100, 100 )
+disabled = true
 text = "Deilvery #7"
 
