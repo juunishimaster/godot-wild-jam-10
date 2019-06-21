@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://GameplayScene.gd" type="Script" id=1]
 [ext_resource path="res://LevelSelection.tscn" type="PackedScene" id=2]
 [ext_resource path="res://BriefingNews.tscn" type="PackedScene" id=3]
 [ext_resource path="res://RouteChoice.tscn" type="PackedScene" id=4]
+[ext_resource path="res://EndLevel.tscn" type="PackedScene" id=5]
 
 [node name="GameplayScene" type="Node"]
 script = ExtResource( 1 )
@@ -38,5 +39,18 @@ margin_top = -88.0
 margin_right = 258.5
 margin_bottom = 88.0
 
+[node name="EndLevel" parent="." instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -275.5
+margin_top = -117.0
+margin_right = 275.5
+margin_bottom = 117.0
+
+[connection signal="stage_cleared" from="." to="EndLevel" method="_on_GameplayScene_stage_cleared"]
+[connection signal="stage_failed" from="." to="EndLevel" method="_on_GameplayScene_stage_failed"]
 [connection signal="load_level" from="LevelSelection" to="." method="_on_LevelSelection_load_level"]
 [connection signal="brief_closed" from="BriefingNews" to="." method="_on_BriefingNews_brief_closed"]
+[connection signal="route_selected" from="RouteChoice" to="." method="_on_RouteChoice_route_selected"]

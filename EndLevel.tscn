@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://EndLevel.gd" type="Script" id=1]
+[ext_resource path="res://art/panel_boltsBlue.png" type="Texture" id=2]
+[ext_resource path="res://font/Kenney Future Narrow.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 3 )
+
+[node name="EndLevel" type="VBoxContainer"]
+margin_right = 551.0
+margin_bottom = 234.0
+custom_constants/separation = 10
+script = ExtResource( 1 )
+
+[node name="NewsPanel" type="NinePatchRect" parent="."]
+margin_right = 551.43
+margin_bottom = 200.0
+rect_min_size = Vector2( 551.43, 200 )
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 128, 128 )
+patch_margin_left = 36
+patch_margin_top = 36
+patch_margin_right = 36
+patch_margin_bottom = 36
+
+[node name="EndLevelText" type="Label" parent="NewsPanel"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -30.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 2 )
+text = "*DELIVERY FAILED*
+
+You've been jailed for bringing illegal goods"
+align = 1
+autowrap = true
+
+[node name="ClosePanelButton" type="Button" parent="."]
+margin_top = 210.0
+margin_right = 551.0
+margin_bottom = 234.0
+custom_fonts/font = SubResource( 3 )
+text = "Close"
+
+[connection signal="pressed" from="ClosePanelButton" to="." method="_on_ClosePanelButton_pressed"]

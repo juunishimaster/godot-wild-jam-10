@@ -12,10 +12,11 @@ var restriction_b = {}
 var restriction_c = {}
 
 var available_routes = ["a", "b", "c"]
-var chosen_route
-var curr_money
+var route_counter = 0
+var total_routes = 0
+var curr_money = 100
 
-signal stage_failed
+signal stage_failed(why)
 signal stage_cleared
 
 # Called when the node enters the scene tree for the first time.
@@ -32,6 +33,7 @@ func _ready():
 	
 	$BriefingNews.hide()
 	$RouteChoice.hide()
+	$EndLevel.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -66,17 +68,59 @@ func randomize_route():
 	$RouteChoice.set_text(route_1, route_2)
 	pass
 
-func check_restriction():
+func check_restriction(c):
+	var curr_checkpoint
+	if c == "a":
+		curr_checkpoint = restriction_a
+	elif c == "b":
+		curr_checkpoint = restriction_b
+	elif c == "c":
+		curr_checkpoint = restriction_c
+		
+	var tax_applied = 0
+	
+	#Iterate the restriction
+	for i in range(curr_checkpoint.size()):
+		for j in range(delivery_goods.size()):
+			#Check if the goods are listed in the restriction
+			if delivery_goods[j]["type"] == curr_checkpoint[i]["goods"]:
+				#Check if passable or tax-able
+				if curr_checkpoint[i]["passable"] == "true":
+					tax_applied += curr_checkpoint[i]["tax"]
+				else:
+					print("Bringing illegal goods")
+					delivery_failed("illegal")
+					return
+	
+	#Pay the accumulated tax
+	if tax_applied > 0:
+		pay_tax(tax_applied)
+	else:
+		#Next route or end level
+		if route_counter == total_routes:
+			delivery_succeed()
+		else:
+			randomize_route()
 	pass
-
-func delivery_failed():
+	
+func pay_tax(t):
+	if curr_money > t:
+		curr_money -= t
+		print("Paid " + str(t) + " for taxes")
+	else:
+		print("Failed to pay tax")
+		delivery_failed("tax")
+	pass
+	
+func delivery_failed(w):
+	emit_signal("stage_failed", w)
 	pass
 
 func delivery_succeed():
+	emit_signal("stage_cleared")
 	pass
 
 func _on_LevelSelection_load_level(lv):
-	print(level_json["levels"][lv]["newsA"])
 	#Show and assign news
 	$BriefingNews.show()
 	
@@ -92,9 +136,9 @@ func _on_LevelSelection_load_level(lv):
 	#Assign delivery goods
 	delivery_goods = level_json["levels"][lv]["delivery"]
 	
-	print(delivery_goods[0]["name"])
+	#Assign total routes
+	total_routes = level_json["levels"][lv]["routesCount"]
 	
-	pass # Replace with function body.
 
 
 func _on_BriefingNews_brief_closed():
@@ -106,4 +150,9 @@ func _on_BriefingNews_brief_closed():
 	#start the timer
 	
 	randomize_route()
+
+
+func _on_RouteChoice_route_selected(r):
+	route_counter += 1
+	check_restriction(r)
 	pass # Replace with function body.

@@ -4,6 +4,7 @@
          "newsA": "Azule Alliance had forbade meat goods from entering any of their checkpoints. Any violators will be jailed.",
          "newsB": "Brue Alliance had declared new taxes for meat goods and alcohol drinks.",
          "newsC": "Due to the rise of obesity recently, Cyan Alliance increased the tax for any snack goods.",
+         "routesCount": 5,
          "ruleA":[
             {
                "goods":"meat",
@@ -54,6 +55,7 @@
           "newsA": "Azule Alliance lifted ban for meat products and decreased tax for fruit products. However, they declare tax for alcohol drinks from now on.",
          "newsB": "Brue Alliance hadn't changed their tax for meat and alcohol goods.",
          "newsC": "Good news for us, Cyan Alliance had decided to decrease the tax for snack goods.",
+         "routesCount": 5,
          "ruleA":[
             {
                "goods":"alcohol",

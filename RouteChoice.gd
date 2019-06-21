@@ -7,6 +7,8 @@ extends VBoxContainer
 var choice_a = "a"
 var choice_b = "b"
 
+signal route_selected(r)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -17,5 +19,17 @@ func _ready():
 
 func set_text(a, b):
 	$HBoxContainer/ChoiceButtonA.text = "Go to checkpoint " + a
+	choice_a = a
 	$HBoxContainer/ChoiceButtonB.text = "Go to checkpoint " + b
-	pass
+	choice_b = b
+
+func select_route(r):
+	emit_signal("route_selected", r)
+	self.hide()
+
+func _on_ChoiceButtonA_pressed():
+	select_route(choice_a)
+
+
+func _on_ChoiceButtonB_pressed():
+	select_route(choice_b)
