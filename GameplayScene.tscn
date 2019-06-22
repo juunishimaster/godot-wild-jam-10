@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://GameplayScene.gd" type="Script" id=1]
 [ext_resource path="res://LevelSelection.tscn" type="PackedScene" id=2]
 [ext_resource path="res://BriefingNews.tscn" type="PackedScene" id=3]
 [ext_resource path="res://RouteChoice.tscn" type="PackedScene" id=4]
 [ext_resource path="res://EndLevel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://DashboardNotes.tscn" type="PackedScene" id=6]
+[ext_resource path="res://font/Kenney Future Narrow.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 42
+font_data = ExtResource( 7 )
 
 [node name="GameplayScene" type="Node"]
 script = ExtResource( 1 )
@@ -35,9 +44,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -258.5
-margin_top = -88.0
+margin_top = -134.654
 margin_right = 258.5
-margin_bottom = 88.0
+margin_bottom = 41.3459
 
 [node name="EndLevel" parent="." instance=ExtResource( 5 )]
 anchor_left = 0.5
@@ -49,8 +58,44 @@ margin_top = -117.0
 margin_right = 275.5
 margin_bottom = 117.0
 
+[node name="DashboardNotes" parent="." instance=ExtResource( 6 )]
+
+[node name="DashboardNotes2" parent="." instance=ExtResource( 6 )]
+margin_left = 42.1934
+margin_top = 282.141
+margin_right = 282.193
+margin_bottom = 582.141
+
+[node name="KredsLabel" type="Label" parent="."]
+margin_left = 896.182
+margin_top = 17.1475
+margin_right = 995.182
+margin_bottom = 35.1475
+custom_fonts/font = SubResource( 1 )
+text = "1000 Kreds"
+
+[node name="TitleLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -137.0
+margin_top = 20.0
+margin_right = 137.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 2 )
+text = "Glitch Navi"
+
+[node name="Label" type="Label" parent="TitleLabel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -228.5
+margin_right = 228.5
+text = "-A Game Prototype in Which You Have Too High Of A Probability to Fail-"
+
 [connection signal="stage_cleared" from="." to="EndLevel" method="_on_GameplayScene_stage_cleared"]
 [connection signal="stage_failed" from="." to="EndLevel" method="_on_GameplayScene_stage_failed"]
 [connection signal="load_level" from="LevelSelection" to="." method="_on_LevelSelection_load_level"]
 [connection signal="brief_closed" from="BriefingNews" to="." method="_on_BriefingNews_brief_closed"]
 [connection signal="route_selected" from="RouteChoice" to="." method="_on_RouteChoice_route_selected"]
+[connection signal="level_select" from="EndLevel" to="." method="_on_EndLevel_level_select"]

@@ -14,7 +14,7 @@ var restriction_c = {}
 var available_routes = ["a", "b", "c"]
 var route_counter = 0
 var total_routes = 0
-var curr_money = 100
+var curr_money = 1000
 
 signal stage_failed(why)
 signal stage_cleared
@@ -34,6 +34,8 @@ func _ready():
 	$BriefingNews.hide()
 	$RouteChoice.hide()
 	$EndLevel.hide()
+	$DashboardNotes.hide()
+	$DashboardNotes2.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -107,20 +109,35 @@ func pay_tax(t):
 	if curr_money > t:
 		curr_money -= t
 		print("Paid " + str(t) + " for taxes")
+		#Update KredsLabel
+		$KredsLabel.text = str(curr_money) + " Kreds"
+		#Next route or end level
+		if route_counter == total_routes:
+			delivery_succeed()
+		else:
+			randomize_route()
 	else:
 		print("Failed to pay tax")
 		delivery_failed("tax")
 	pass
 	
 func delivery_failed(w):
+	$DashboardNotes.hide()
+	$DashboardNotes2.hide()
+	$EndLevel.show()
 	emit_signal("stage_failed", w)
 	pass
 
 func delivery_succeed():
+	$DashboardNotes.hide()
+	$DashboardNotes2.hide()
+	$EndLevel.show()
 	emit_signal("stage_cleared")
 	pass
 
 func _on_LevelSelection_load_level(lv):
+	$LevelSelection.hide()
+	
 	#Show and assign news
 	$BriefingNews.show()
 	
@@ -143,16 +160,64 @@ func _on_LevelSelection_load_level(lv):
 
 func _on_BriefingNews_brief_closed():
 	print("Game start")
-	if restriction_a[0]["passable"] == "true":
-		print(restriction_a[0]["goods"] + " is passable")
-	else:
-		print(restriction_a[0]["goods"] + " is not passable")
-	#start the timer
+	$BriefingNews.hide()
+	
+	#Restart the Kreds
+	curr_money = 1000
+	$KredsLabel.text = str(curr_money) + " Kreds"
+	
+	#Restart the route counter
+	route_counter = 0
+	
+	#Set the dashboard delivery notes
+	$DashboardNotes.show()
+	var delivery_text = "Delivery List:\n"
+	
+	for d in range(delivery_goods.size()):
+		delivery_text += "- " + delivery_goods[d]["name"] + " (" + delivery_goods[d]["type"] + ")\n"
+	
+	$DashboardNotes/Label.text = delivery_text
+	
+	#Set the dashboard checkpoint notes
+	$DashboardNotes2.show()
+	var checkpoint_text
+	
+	#Checkpoint A
+	checkpoint_text = "Azule Checkpoints:\n"
+	for a in range(restriction_a.size()):
+		if restriction_a[a]["passable"] == "false":
+			checkpoint_text += "- No " + restriction_a[a]["goods"] + "\n"
+		else:
+			checkpoint_text += "- " + restriction_a[a]["goods"] + " " + str(restriction_a[a]["tax"]) + " Kreds" + "\n"
+	
+	#Checkpoint B
+	checkpoint_text += "\nBrue Checkpoints:\n"
+	for b in range(restriction_b.size()):
+		if restriction_b[b]["passable"] == "false":
+			checkpoint_text += "- No " + restriction_b[b]["goods"] + "\n"
+		else:
+			checkpoint_text += "- " + restriction_b[b]["goods"] + " " + str(restriction_b[b]["tax"]) + " Kreds" + "\n"
+	
+	#Checkpoint C
+	checkpoint_text += "\nCyan Checkpoints:\n"
+	for c in range(restriction_c.size()):
+		if restriction_c[c]["passable"] == "false":
+			checkpoint_text += "- No " + restriction_c[c]["goods"] + "\n"
+		else:
+			checkpoint_text += "- " + restriction_c[c]["goods"] + " " + str(restriction_c[c]["tax"]) + " Kreds" + "\n"
+	
+	$DashboardNotes2/Label.text = checkpoint_text
 	
 	randomize_route()
 
 
 func _on_RouteChoice_route_selected(r):
+	$RouteChoice.hide()
 	route_counter += 1
 	check_restriction(r)
+
+
+func _on_EndLevel_level_select():
+	$EndLevel.hide()
+	$LevelSelection.show()
 	pass # Replace with function body.

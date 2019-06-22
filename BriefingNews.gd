@@ -15,6 +15,5 @@ func _ready():
 
 
 func _on_CloseBriefingButton_pressed():
-	self.hide()
 	emit_signal("brief_closed")
 	pass # Replace with function body.

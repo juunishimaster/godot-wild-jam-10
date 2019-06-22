@@ -4,10 +4,10 @@
 [ext_resource path="res://art/panel_boltsBlue.png" type="Texture" id=2]
 [ext_resource path="res://font/Kenney Future Narrow.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 3 )
 
 [node name="EndLevel" type="VBoxContainer"]
@@ -33,7 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = -30.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "*DELIVERY FAILED*
 
 You've been jailed for bringing illegal goods"
@@ -44,7 +44,7 @@ autowrap = true
 margin_top = 210.0
 margin_right = 551.0
 margin_bottom = 234.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Close"
 
 [connection signal="pressed" from="ClosePanelButton" to="." method="_on_ClosePanelButton_pressed"]

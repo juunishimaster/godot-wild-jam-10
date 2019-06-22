@@ -21,5 +21,3 @@ func level_button_pressed(lv):
 	print("Load level-" + str(lv))
 	#emit signal of level data
 	emit_signal("load_level", lv)
-	self.hide()
-	#hide this level selection

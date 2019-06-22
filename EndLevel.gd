@@ -18,17 +18,19 @@ func _ready():
 
 
 func _on_ClosePanelButton_pressed():
-	self.hide()
-	if state == "clear":
-		print("Next level")
-	else:
-		print("Back to level selection")
+	emit_signal("level_select")
+	
+	#if state == "clear":
+	#	print("Next level")
+	#	emit_signal("next_level")
+	#else:
+	#	print("Back to level selection")
+	#	emit_signal("level_select")
 	pass # Replace with function body.
 
 
 func _on_GameplayScene_stage_failed(why):
 	state = why
-	self.show()
 
 	if state == "tax":
 		$NewsPanel/EndLevelText.text = "*Delivery Failed*\n\nYou've been jailed for failing to pay taxes"
@@ -40,5 +42,5 @@ func _on_GameplayScene_stage_failed(why):
 
 func _on_GameplayScene_stage_cleared():
 	state = "clear"
-
+	$NewsPanel/EndLevelText.text = "*Delivery Succeed*\n\nCongratulations!"
 	pass # Replace with function body.

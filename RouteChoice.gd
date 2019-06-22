@@ -25,7 +25,6 @@ func set_text(a, b):
 
 func select_route(r):
 	emit_signal("route_selected", r)
-	self.hide()
 
 func _on_ChoiceButtonA_pressed():
 	select_route(choice_a)
